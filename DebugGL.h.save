@@ -1,0 +1,21 @@
+#ifndef DEBUGGL_H_INCLUDED
+#define DEBUGGL_H_INCLUDED
+
+#ifdef WIN32
+#include <gl/glew.h>
+#else
+#define GLCOREARB_PROTOTYPES 1
+#include <GL/glcorearb.h>
+#endif
+#include <string>
+#include <iostream>
+
+#define GL_CHECK Debug::glCheck(__FILE__,__LINE__)
+
+namespace Debug
+{
+    bool glCheck(std::string filename, int line);
+
+};
+
+#endif // DEBUGGL_H_INCLUDED

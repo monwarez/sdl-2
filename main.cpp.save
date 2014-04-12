@@ -1,0 +1,19 @@
+#include "Game.h"
+
+int main (int argc, char **argv)
+{
+    try
+    {
+        Game    game;
+        return game.run();
+    }
+    catch (Error error)
+    {
+        error.ShowError()
+    }
+    catch (...)
+    {
+        std::cerr << "Unknow Error" << std::endl;
+    }
+    return EXIT_FAILURE;
+}

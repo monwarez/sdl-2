@@ -1,0 +1,60 @@
+#ifndef OBJECT_H_INCLUDED
+#define OBJECT_H_INCLUDED
+
+#include "Graphics.h"
+#include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+#include "Texture.h"
+#include "MD2Loader.h"
+
+#include "DebugGL.h"
+
+#ifndef BUFFER_OFFSET
+
+    #define BUFFER_OFFSET(offset) ((char*)NULL + (offset))
+
+#endif
+struct ShaderUniformMatrix
+{
+    glm::mat4 modelview;
+    glm::mat4 projection;
+    GLuint    modelviewLocation;
+    GLuint    projectionLocation;
+    GLuint    mvpLocation;
+};
+class IObject
+{
+    public:
+        IObject();
+        virtual ~IObject();
+        virtual void        Show(ShaderUniformMatrix uniformMatrix, Uint32 fps) =0;
+};
+class CubeObject : public IObject
+{
+    public:
+        CubeObject();
+        ~CubeObject();
+
+        void                Show(ShaderUniformMatrix uniformMatrix, Uint32 fps);
+
+    protected:
+        GLuint              m_vao;
+        GLuint              m_vbo;
+        GLsizei             m_tailleVerticesBytes;
+        GLsizei             m_tailleCoordBytes;
+        Texture             m_texture;
+        bool                m_useVao;
+
+};
+class   MD2Object   :   public IObject
+{
+    public:
+        MD2Object(CEntity *entityModel); // on disposera d'un gestionnaire de ressource
+        ~MD2Object();
+
+        void                Show(ShaderUniformMatrix, Uint32 fps);
+        
+};
+#endif // OBJECT_H_INCLUDED
