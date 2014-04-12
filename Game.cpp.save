@@ -3,7 +3,7 @@ Game::Game()
 {
     // plus tard on utilisera un fichier
     m_graphics  =   new CGraphics(1600,900,true,"game engine",32,2,
-                                  3,2);
+                                  3,3); // tant pis pour le support de mac os
     m_input     =   new CInput;
 
 }
@@ -28,7 +28,7 @@ int     Game::run()
 
     //m_input->GrabCursor(true);    // ne fonctionne pas bien
     m_input->ShowCursor(false);
-    //scene.AttachObject(&object); // on
+    //scene.AttachObject(&object); // on ne s'occupe plus du cube
     object.SetIDTexture(texture.getID());
     scene.AttachObject(&md2Object);
     scene.AttachInput(m_input);

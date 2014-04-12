@@ -1,3 +1,19 @@
+/*
+Copyright (C) 2014 Payet thibault
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>
+*/
 #include "MD2Loader.h"
 using namespace std;
 
@@ -118,7 +134,6 @@ void CMD2Model::LoadVBO()
     glBindVertexArray(m_vaoID);
         glBindBuffer(GL_ARRAY_BUFFER, m_vboID[0]);
 
-            //glBufferData(GL_ARRAY_BUFFER, (m_kHeader.num_tris*24)* sizeof(GLfloat), 0, GL_STREAM_DRAW);
             glBufferData(GL_ARRAY_BUFFER, (m_kHeader.num_tris* 9)  * sizeof(GLfloat), 0, GL_STREAM_DRAW);
             glVertexAttribPointer(0,3,GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
             glEnableVertexAttribArray(0);
@@ -230,7 +245,7 @@ void CMD2Model::UpdateVBO()
 
 
             if (adresseVBO == NULL)
-                throw GEST_ERROR("le vbo est pointeur null");
+                throw GEST_ERROR("le vbo est pointeur null - vertices");
 
             memcpy(adresseVBO, &m_vertice[0], m_sSommets);
             glUnmapBuffer(GL_ARRAY_BUFFER);
@@ -241,7 +256,7 @@ void CMD2Model::UpdateVBO()
         glBindBuffer(GL_ARRAY_BUFFER,m_vboID[1]);
             adresseVBO          =   glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
             if (adresseVBO == NULL)
-                throw GEST_ERROR("le vbo est pointeur null");
+                throw GEST_ERROR("le vbo est pointeur null - textureCoord0");
 
             memcpy(adresseVBO, &m_texCoord[0], m_sCoord);
             glUnmapBuffer(GL_ARRAY_BUFFER);
@@ -252,7 +267,7 @@ void CMD2Model::UpdateVBO()
         glBindBuffer(GL_ARRAY_BUFFER,m_vboID[2]);
             adresseVBO          =   glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
             if (adresseVBO == NULL)
-                throw GEST_ERROR("le vbo est pointeur null");
+                throw GEST_ERROR("le vbo est pointeur null - normals");
 
             memcpy(adresseVBO, &m_normals[0], m_sNormals);
             glUnmapBuffer(GL_ARRAY_BUFFER);
