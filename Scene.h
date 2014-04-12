@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #include "Shader.h"
 #include "Input.h"
 #include "Camera.h"
+#include "FrameBuffer.h"
 #include <vector>
 
 template <typename T>
@@ -40,7 +41,7 @@ class   CScene
     public:
         CScene();
         virtual ~CScene();
-        virtual     void        Show(Uint32 elapsed);
+        virtual     void        Show(Uint32 elapsed, GLsizei width, GLsizei height);
         virtual     int         AttachObject(IObject *object); // pour l'instant retourne un indice
         virtual     void        AttachInput(CInput *input);
     protected:
@@ -48,8 +49,11 @@ class   CScene
 
         Shader*                     m_pShader;
         ShaderUniformMatrix         m_uniformMatrix;
+        ShaderUniformMatrix         m_uniformMatrixFBO;
         CInput*                     m_pCInput;
         Camera*                     m_pCamera;
+        FrameBuffer*                m_pFBO;
+        QuadObject                  m_quad;
 
 };
 

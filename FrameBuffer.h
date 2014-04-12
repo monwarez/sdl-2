@@ -28,7 +28,7 @@ class FrameBuffer
         FrameBuffer();
         FrameBuffer(int largeur, int hauteur);
         void    CreerRenderBuffer(GLuint &id, GLenum formatInterne);
-        bool    Load();
+        void    Load(); // peut lancer une exception de type Error -ie ne pas oublier les blocs try/catch
          ~FrameBuffer();
         GLuint  GetID()const;
         GLuint  GetColorBufferID(unsigned int index) const;

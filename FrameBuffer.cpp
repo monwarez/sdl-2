@@ -39,7 +39,7 @@ void FrameBuffer::CreerRenderBuffer(GLuint &id, GLenum formatInterne)
     glBindRenderbuffer(GL_RENDERBUFFER,0);
 
 }
-bool    FrameBuffer::Load()
+void    FrameBuffer::Load()
 {
     if (GL_TRUE == glIsFramebuffer(m_id))
     {
@@ -72,12 +72,11 @@ bool    FrameBuffer::Load()
             glDeleteFramebuffers(1,&m_id);
             glDeleteRenderbuffers(1,&m_depthBufferID);
 
-            std::cerr << "Erreur le FBO est mal construit" << std::endl;
-            return false;
+            m_colorBuffers.clear();
+            GEST_ERROR("erreur le fbo est mal construit");
         }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-    return true;
 }
 GLuint  FrameBuffer::GetID() const
 {

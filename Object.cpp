@@ -24,20 +24,20 @@ IObject::~IObject()
 {
 
 }
-CubeObject::CubeObject()
+QuadObject::QuadObject()
 {
 
 
     GLfloat     vertices[]  =   {   0,0,0,   0,1,0,    0,1,1,
-                                    0,0,1, 1,0,0 , 1,1,0 , 0,1,0
+                                    0,0,1
                                     };
 
 
     GLfloat     coordTex[]  = {  0,0 , 1,0,    1,1,
-                                 0,1 , 1,0, 1,1 , 1,0 };
+                                 0,1  };
 
-    m_tailleCoordBytes      =   14 * sizeof(GLfloat);
-    m_tailleVerticesBytes     =   21 * sizeof(GLfloat);
+    m_tailleCoordBytes      =   8 * sizeof(GLfloat);
+    m_tailleVerticesBytes     =   12 * sizeof(GLfloat);
 
 
         glGenBuffers(1,&m_vbo);
@@ -60,17 +60,17 @@ CubeObject::CubeObject()
 
 
 }
-void    CubeObject::SetIDTexture(GLuint IDTexture)
+void    QuadObject::SetIDTexture(GLuint IDTexture)
 {
     m_IDtexture     =   IDTexture;
 }
-CubeObject::~CubeObject()
+QuadObject::~QuadObject()
 {
     glDeleteBuffers(1,&m_vbo);
 
     glDeleteVertexArrays(1,&m_vao);
 }
-void        CubeObject::Show(ShaderUniformMatrix uniformMatrix, Uint32 fps)
+void        QuadObject::Show(ShaderUniformMatrix uniformMatrix, Uint32 fps)
 {
 
 
@@ -84,7 +84,7 @@ void        CubeObject::Show(ShaderUniformMatrix uniformMatrix, Uint32 fps)
 
         glBindVertexArray(m_vao);
             glBindTexture(GL_TEXTURE_2D, m_IDtexture);
-                glDrawArrays(GL_TRIANGLE_FAN,0,7);
+                glDrawArrays(GL_TRIANGLE_FAN,0,4);
 
             glBindTexture(GL_TEXTURE_2D,0);
         glBindVertexArray(0);

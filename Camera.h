@@ -41,6 +41,7 @@ class Camera
 
         void                setSensitive(float sensitive);
         void                setSpeed(float speed);
+        glm::vec3           GetPointCible()const {return m_pointCible;}
         virtual ~Camera();
     protected:
         float               m_phi;

@@ -54,7 +54,7 @@ int     Game::run()
         glClearColor(200/255.0,200/255.0,200/255.0,1.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        scene.Show(elapsed);
+        scene.Show(elapsed, 1600,900);
 
         m_graphics->SwapWindow();
 

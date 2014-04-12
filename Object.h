@@ -47,12 +47,12 @@ class IObject
         virtual ~IObject();
         virtual void        Show(ShaderUniformMatrix uniformMatrix, Uint32 fps) =0;
 };
-class CubeObject : public IObject
+class QuadObject : public IObject
 {
     public:
-        CubeObject();
+        QuadObject();
         void SetIDTexture(GLuint IDtexture);
-        virtual ~CubeObject();
+        virtual ~QuadObject();
 
         virtual void        Show(ShaderUniformMatrix uniformMatrix, Uint32 fps);
 
