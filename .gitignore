@@ -215,3 +215,5 @@ pip-log.txt
 .mr.developer.cfg
 #save file
 .save
+#codeblocks layout
+.layout
