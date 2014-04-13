@@ -29,5 +29,7 @@ class   Game
     protected:
         CGraphics*      m_graphics;
         CInput*         m_input;
+        int             m_windowWidth;
+        int             m_windowHeight;
 };
 #endif // GAME_H_INCLUDED

@@ -44,6 +44,7 @@ class   CScene
         virtual     void        Show(Uint32 elapsed, GLsizei width, GLsizei height);
         virtual     int         AttachObject(IObject *object); // pour l'instant retourne un indice
         virtual     void        AttachInput(CInput *input);
+        virtual     void        SetPerspective(GLfloat fov, GLfloat width, GLfloat height, GLfloat near, GLfloat far);
     protected:
         std::vector < IObject *>    m_pObject;
 

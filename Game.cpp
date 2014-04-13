@@ -15,13 +15,34 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 #include "Game.h"
+#include <stdio.h>
+
 Game::Game()
 {
     // plus tard on utilisera un fichier
-    m_graphics  =   new CGraphics(1600,900,true,"game engine",32,2,
+    // utilisation du fichier de configuration
+    FILE* config;
+    m_windowWidth   =   800;
+    m_windowHeight  =   600;
+    bool isFullscreen(false);
+    config = fopen("./data/config","r");
+    if (config != NULL)
+    {
+        int w,h,bF;
+        if (fscanf(config,"monitor %d %d\n", &w,&h) == 2)
+        {
+            m_windowWidth   = w;
+            m_windowHeight  = h;
+        }
+        if (fscanf(config,"fullscreen %d\n",&bF) == 1)
+            isFullscreen = (bF == 1) ? true : false;
+
+        fclose(config);
+    }
+
+    m_graphics  =   new CGraphics(m_windowWidth,m_windowHeight,isFullscreen,"game engine",32,2,
                                   3,3); // tant pis pour le support de mac os
     m_input     =   new CInput;
-
 }
 int     Game::run()
 {
@@ -45,6 +66,7 @@ int     Game::run()
     scene.AttachInput(m_input);
     Uint32 framerate = (1000/50);
     Uint32 debutBoucle(0), elapsed(0), finBoucle(0);
+    scene.SetPerspective(70.0,m_windowWidth,m_windowHeight,0.1,100);
     while (!m_input->terminer())
     {
 
@@ -54,7 +76,7 @@ int     Game::run()
         glClearColor(200/255.0,200/255.0,200/255.0,1.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        scene.Show(elapsed, 1600,900);
+        scene.Show(elapsed, m_windowWidth,m_windowHeight);
 
         m_graphics->SwapWindow();
 

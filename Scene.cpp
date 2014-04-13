@@ -21,12 +21,12 @@ CScene::CScene()
     m_pShader   =   new Shader("Shaders/texture.vert","Shaders/texture.frag");
     m_pShader->charger();
     m_uniformMatrix.modelview   =   glm::mat4(1);
-    m_uniformMatrix.projection  =   glm::perspective(70.0, 1024/768.0, 0.01,100.0);
+    m_uniformMatrix.projection  =   glm::perspective(70.0, 1600.0/900, 0.01,100.0);
     m_pCInput                   =   0;
     m_pCamera                   =   new Camera(glm::vec3(-1,-1,1),glm::vec3(0,0,0),glm::vec3(0,0,1));
 
     m_pCamera->setSpeed(0.01);
-    m_pFBO                      =   new FrameBuffer(1600,900);
+    m_pFBO                      =   new FrameBuffer(1024,1024);
     m_pFBO->Load();
 
     m_uniformMatrixFBO.projection=  glm::perspective(70.0, (double)m_pFBO->GetLargeur()/m_pFBO->GetHauteur(),1.0,100.0);
@@ -38,6 +38,12 @@ CScene::~CScene()
     delete m_pCamera;
     delete m_pFBO;
 
+}
+void    CScene::SetPerspective(GLfloat fov, GLfloat width, GLfloat height, GLfloat near, GLfloat far)
+{
+    m_uniformMatrix.projection = glm::perspective(fov, width/height, near, far);
+
+    m_uniformMatrixFBO.projection=  glm::perspective(fov, (float)m_pFBO->GetLargeur()/m_pFBO->GetHauteur(),near,far);
 }
 void    CScene::Show(Uint32 elapsed, GLsizei width, GLsizei height)
 {
