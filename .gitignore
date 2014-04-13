@@ -219,3 +219,4 @@ pip-log.txt
 .layout
 #codeblocks back
 .bak
+*.layout
