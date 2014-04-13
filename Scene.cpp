@@ -59,31 +59,32 @@ void    CScene::Show(Uint32 elapsed, GLsizei width, GLsizei height)
 
         glm::vec3 cible                         =   m_pCamera->GetPointCible();
         cible                                   =   glm::vec3(0);
-        m_uniformMatrixFBO.modelview            =   glm::lookAt(glm::vec3(-6,-1,0),cible, glm::vec3(0,0,1));
+        m_uniformMatrixFBO.modelview            =   glm::lookAt(glm::vec3(-4,-1,0), cible, glm::vec3(0,0,1));
+
 
         glBindFramebuffer(GL_FRAMEBUFFER, m_pFBO->GetID());
             glClearColor(1.0,1.0,1.0,1.0);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             // on redimensionne la zone d'affichage
-            //glViewport(0,0,m_pFBO->GetLargeur(), m_pFBO->GetHauteur());
+            glViewport(0,0,m_pFBO->GetLargeur(), m_pFBO->GetHauteur());
 
 
             // rendu FBO
             for (unsigned int i=0; i < m_pObject.size(); ++i)
             {
-                m_pObject[i]->Show(m_uniformMatrixFBO, elapsed);
+                m_pObject[i]->Show(m_uniformMatrixFBO, 2*elapsed);
             }
         glBindFramebuffer(GL_FRAMEBUFFER,0);
         m_quad.SetIDTexture(m_pFBO->GetColorBufferID(0));
         // on revient dans la bonne dim
-        //glViewport(0,0,width,height);
+        glViewport(0,0,width,height);
         ShaderUniformMatrix intermed = m_uniformMatrix;
         intermed.modelview  =   glm::translate(intermed.modelview, glm::vec3(-4,-1,0));
         intermed.modelview  =   glm::scale(intermed.modelview, glm::vec3(3,3,3));
         m_quad.Show(intermed,elapsed);
         for (unsigned int i=0; i < m_pObject.size(); ++i)
         {
-            m_pObject[i]->Show(m_uniformMatrix, elapsed);
+            m_pObject[i]->Show(m_uniformMatrix, 2*elapsed);
         }
     glUseProgram(0);
 
