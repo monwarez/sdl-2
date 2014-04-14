@@ -67,7 +67,7 @@ void    CScene::Show(Uint32 elapsed, GLsizei width, GLsizei height)
         glm::vec3 camPosition                   =   m_pCamera->GetPosition();
         glm::vec3 centre                        =   glm::vec3(0,0,0) + glm::vec3(0,0.5,0) + glm::vec3(0,0.5,0.5)
                                                      + glm::vec3(0,0,0.5) ;
-        centre                                  = glm::vec3(-4,-1,0);
+        centre                                  += glm::vec3(-4,-1,0);
         glm::vec3   centerToCam                 =   camPosition - centre;
         glm::vec3   b1                          =   glm::vec3(0,0.5,0);
         glm::vec3   b2                          =   glm::vec3(0,0.5,0.5);
