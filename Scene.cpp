@@ -63,13 +63,28 @@ void    CScene::Show(Uint32 elapsed, GLsizei width, GLsizei height)
         m_uniformMatrixFBO.modelviewLocation    =   glGetUniformLocation(shaderID, "modelview");
         m_uniformMatrixFBO.mvpLocation          =   glGetUniformLocation(shaderID,"modelviewprojection");
 
-        glm::vec3 cible                         =   m_pCamera->GetPointCible();
-        cible                                   =   glm::vec3(0);
+        // miroir
+        glm::vec3 camPosition                   =   m_pCamera->GetPosition();
+        glm::vec3 centre                        =   glm::vec3(0,0,0) + glm::vec3(0,0.5,0) + glm::vec3(0,0.5,0.5)
+                                                     + glm::vec3(0,0,0.5) ;
+        centre                                  = glm::vec3(-4,-1,0);
+        glm::vec3   centerToCam                 =   camPosition - centre;
+        glm::vec3   b1                          =   glm::vec3(0,0.5,0);
+        glm::vec3   b2                          =   glm::vec3(0,0.5,0.5);
+        glm::vec3   normal                      =   glm::cross(b1,b2);
+        glm::normalize(normal);
+        glm::normalize(centerToCam);
+
+
+
+        // calcul savant , cible = - centerToCam  + 2 * produitScalaire(centerToCam,normal) * normal
+        // multiplier par -1 nous dis l'exp
+        glm::vec3 cible                         =   -2 * glm::dot(centerToCam,normal) * normal + centerToCam;
         m_uniformMatrixFBO.modelview            =   glm::lookAt(glm::vec3(-4,-1,0), cible, glm::vec3(0,0,1));
 
 
         glBindFramebuffer(GL_FRAMEBUFFER, m_pFBO->GetID());
-            glClearColor(1.0,1.0,1.0,1.0);
+            //glClearColor(1.0,1.0,1.0,1.0);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             // on redimensionne la zone d'affichage
             glViewport(0,0,m_pFBO->GetLargeur(), m_pFBO->GetHauteur());
