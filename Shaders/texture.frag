@@ -1,6 +1,6 @@
 // Version du GLSL
 
-#version 330
+#version 150
 
 
 // Entrée
@@ -26,7 +26,8 @@ uniform sampler2D tex0;
 
 // Sortie 
 
-layout (location = 0) out vec4 out_Color;
+// layout (location = 0) out vec4 out_Color; // for 330 and more
+out vec4 out_Color;
 
 
 // Fonction main

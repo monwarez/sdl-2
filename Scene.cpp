@@ -26,7 +26,7 @@ CScene::CScene()
     m_pCamera                   =   new Camera(glm::vec3(-1,-1,1),glm::vec3(0,0,0),glm::vec3(0,0,1));
 
     m_pCamera->setSpeed(0.01);
-    m_pFBO                      =   new FrameBuffer(1024,1024);
+    m_pFBO                      =   new FrameBuffer(2048,2048);
     m_pFBO->Load();
 
     m_uniformMatrixFBO.projection=  glm::perspective(70.0, (double)m_pFBO->GetLargeur()/m_pFBO->GetHauteur(),1.0,100.0);
@@ -75,6 +75,7 @@ void    CScene::Show(Uint32 elapsed, GLsizei width, GLsizei height)
         glm::normalize(normal);
         glm::normalize(centerToCam);
 
+        //normal                                  =   (glm::dot(centerToCam,normal) > 0) ? normal : -normal;
 
 
         // calcul savant , cible = - centerToCam  + 2 * produitScalaire(centerToCam,normal) * normal
@@ -82,7 +83,8 @@ void    CScene::Show(Uint32 elapsed, GLsizei width, GLsizei height)
         glm::vec3 cible                         =   -2 * glm::dot(centerToCam,normal) * normal + centerToCam;
         m_uniformMatrixFBO.modelview            =   glm::lookAt(glm::vec3(-4,-1,0), cible, glm::vec3(0,0,1));
 
-
+        // the mirror reverse the image so in this case is Y axis
+        m_uniformMatrixFBO.modelview            =   glm::scale(m_uniformMatrixFBO.modelview,glm::vec3(1.0,-1.0,1.0));
         glBindFramebuffer(GL_FRAMEBUFFER, m_pFBO->GetID());
             //glClearColor(1.0,1.0,1.0,1.0);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -100,8 +102,8 @@ void    CScene::Show(Uint32 elapsed, GLsizei width, GLsizei height)
         // on revient dans la bonne dim
         glViewport(0,0,width,height);
         ShaderUniformMatrix intermed = m_uniformMatrix;
-        intermed.modelview  =   glm::translate(intermed.modelview, glm::vec3(-4,-1,0));
-        intermed.modelview  =   glm::scale(intermed.modelview, glm::vec3(3,3,3));
+        intermed.modelview  =   glm::translate(intermed.modelview, glm::vec3(-4,-1,-1));
+        intermed.modelview  =   glm::scale(intermed.modelview, glm::vec3(4,4,4));
         m_quad.Show(intermed,elapsed);
         for (unsigned int i=0; i < m_pObject.size(); ++i)
         {

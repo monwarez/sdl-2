@@ -41,7 +41,7 @@ Game::Game()
     }
 
     m_graphics  =   new CGraphics(m_windowWidth,m_windowHeight,isFullscreen,"game engine",32,2,
-                                  3,3); // tant pis pour le support de mac os
+                                  3,2); // support possible de Mac OS X
     m_input     =   new CInput;
 }
 int     Game::run()

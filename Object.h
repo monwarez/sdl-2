@@ -80,4 +80,13 @@ class   MD2Object   :   public IObject
         int                 m_end;
         bool                m_animated;
 };
+class   MirrorObject : public IObject // pas sur de faire hériter d'un objet normal
+{
+    public:
+        MirrorObject(GLsizei taille);
+        ~MirrorObject();
+        virtual void                        Show(ShaderUniformMatrix, Uint32 fps);
+        virtual ShaderUniformMatrix         Begin(); // place before the first pass
+        virtual void                        End();
+};
 #endif // OBJECT_H_INCLUDED

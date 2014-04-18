@@ -117,3 +117,24 @@ void    MD2Object::Show(ShaderUniformMatrix uniformMatrix, Uint32 fps)
     m_entity->Animate(m_start,m_end,10.0/fps);
     m_entity->DrawEntity(-1, m_animated, false);
 }
+MirrorObject::MirrorObject(GLsizei taille)
+{
+
+}
+MirrorObject::~MirrorObject()
+{
+
+}
+ShaderUniformMatrix   MirrorObject::Begin()
+{
+
+}
+void    MirrorObject::End()
+{
+
+
+}
+void    MirrorObject::Show(ShaderUniformMatrix m, Uint32 fps)
+{
+
+}
