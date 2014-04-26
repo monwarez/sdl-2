@@ -48,6 +48,7 @@ CMD2Model::~CMD2Model()
 }
 bool CMD2Model::LoadModel(string szFilename)
 {
+    GL_CHECK;
     m_ModelName =   szFilename;
     fstream     file;
 
@@ -113,20 +114,24 @@ bool CMD2Model::LoadModel(string szFilename)
 
     // chargement du model réussi
     m_isLoadMdl = true;
+    GL_CHECK;
     return true;
 }
 bool CMD2Model::LoadTexture(string szFilename)
 {
+    GL_CHECK;
     m_texture.setFilename(szFilename);
     if (m_texture.load())
+    {
+        GL_CHECK;
         return true;
-
+    }
     return false;
 }
 
 void CMD2Model::LoadVBO()
 {
-
+    GL_CHECK;
     glGenBuffers(3, m_vboID);
 
     glGenVertexArrays(1,&m_vaoID);
@@ -146,6 +151,7 @@ void CMD2Model::LoadVBO()
             glVertexAttribPointer(3,3,GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
             glEnableVertexAttribArray(3);
     glBindVertexArray(0);
+    GL_CHECK;
 
 }
 
@@ -177,6 +183,7 @@ void CMD2Model::FreeModel()
 }
 void CMD2Model::RenderFrame(int iFrame)
 {
+    GL_CHECK;
     int     iMaxFrame   =   m_kHeader.num_frames - 1;
 
     m_texCoord.clear();
@@ -231,7 +238,7 @@ void CMD2Model::RenderFrame(int iFrame)
         glDrawArrays(GL_TRIANGLES, 0, nbTris);
         glBindTexture(GL_TEXTURE_2D,0);
 
-    glBindVertexArray(m_vaoID);
+    glBindVertexArray(0);
     GL_CHECK;
 }
 void CMD2Model::UpdateVBO()
