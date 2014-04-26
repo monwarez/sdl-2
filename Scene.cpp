@@ -16,9 +16,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 #include "Scene.h"
 
-CScene::CScene()
+CScene::CScene(std::string ShaderPath)
 {
-    m_pShader   =   new Shader("Shaders/texture.vert","Shaders/texture.frag");
+	
+    m_pShader   =   new Shader(ShaderPath + std::string("texture.vert"),ShaderPath + std::string("texture.frag"));
     m_pShader->charger();
     m_uniformMatrix.modelview   =   glm::mat4(1);
     m_uniformMatrix.projection  =   glm::perspective(70.0, 1600.0/900, 0.01,100.0);
@@ -26,7 +27,7 @@ CScene::CScene()
     m_pCamera                   =   new Camera(glm::vec3(-1,-1,1),glm::vec3(0,0,0),glm::vec3(0,0,1));
 
     m_pCamera->setSpeed(0.01);
-    m_pFBO                      =   new FrameBuffer(2048,2048);
+    m_pFBO                      =   new FrameBuffer(512,512);
     m_pFBO->Load();
 
     m_uniformMatrixFBO.projection=  glm::perspective(70.0, (double)m_pFBO->GetLargeur()/m_pFBO->GetHauteur(),1.0,100.0);

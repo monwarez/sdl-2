@@ -1,2 +1,3 @@
-monitor 1600 900
-fullscreen 1
+monitor 800 600
+fullscreen 0
+OpenGL version 2 1

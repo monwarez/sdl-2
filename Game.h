@@ -31,5 +31,7 @@ class   Game
         CInput*         m_input;
         int             m_windowWidth;
         int             m_windowHeight;
+		int				m_major;
+		int 			m_minor;
 };
 #endif // GAME_H_INCLUDED

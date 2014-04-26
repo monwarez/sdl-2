@@ -39,7 +39,7 @@ class   Arbre
 class   CScene
 {
     public:
-        CScene();
+        CScene(std::string shaderPath="./Shaders/");
         virtual ~CScene();
         virtual     void        Show(Uint32 elapsed, GLsizei width, GLsizei height);
         virtual     int         AttachObject(IObject *object); // pour l'instant retourne un indice

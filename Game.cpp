@@ -19,12 +19,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 Game::Game()
 {
-    // plus tard on utilisera un fichier
     // utilisation du fichier de configuration
     FILE* config;
     m_windowWidth   =   800;
     m_windowHeight  =   600;
     bool isFullscreen(false);
+	m_major			=	2;
+	m_minor			=	1;
     config = fopen("./data/config","r");
     if (config != NULL)
     {
@@ -36,12 +37,16 @@ Game::Game()
         }
         if (fscanf(config,"fullscreen %d\n",&bF) == 1)
             isFullscreen = (bF == 1) ? true : false;
-
+		if (fscanf(config,"OpenGL version %d %d\n",&w,&h) == 2)
+		{
+			m_major = w;
+			m_minor = h;
+		}
         fclose(config);
     }
 
     m_graphics  =   new CGraphics(m_windowWidth,m_windowHeight,isFullscreen,"game engine",32,2,
-                                  3,2); // support possible de Mac OS X
+                                  m_major,m_minor); // support possible de Mac OS X
     m_input     =   new CInput;
 }
 int     Game::run()
@@ -49,7 +54,12 @@ int     Game::run()
 
     CMD2Model   model;
     CEntity     entity;
-    CScene      scene;
+	std::string	ShaderPath;
+	if (m_major < 3)
+    	ShaderPath	=	"Shader-120/";
+	else
+		ShaderPath	=	"Shaders/";
+	CScene		scene(ShaderPath);
 
     //
     model.LoadModel("./data/md2/cobra/cobra.md2");
