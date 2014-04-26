@@ -51,7 +51,8 @@ Game::Game()
 }
 int     Game::run()
 {
-
+    // purge all GL error
+    while (!GL_CHECK);
     CMD2Model   model;
     CEntity     entity;
 	std::string	ShaderPath;
@@ -65,14 +66,20 @@ int     Game::run()
     model.LoadModel("./data/md2/cobra/cobra.md2");
     model.LoadTexture("./data/md2/cobra/cobra.jpg");
     model.LoadVBO();
+
+
+
     entity.SetModel(&model);
     entity.SetScale(0.1);
+
+
     MD2Object   md2Object(&entity);
     md2Object.SetAnimation(0,20,true);
 
     //m_input->GrabCursor(true);    // ne fonctionne pas bien
     m_input->ShowCursor(false);
     scene.AttachObject(&md2Object);
+
     scene.AttachInput(m_input);
     Uint32 framerate = (1000/50);
     Uint32 debutBoucle(0), elapsed(0), finBoucle(0);
