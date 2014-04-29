@@ -25,6 +25,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #include "Texture.h"
 #include "MD2Loader.h"
 
+// Assimp Load 
+#include "AssimpLoad.h"
+
 #include "DebugGL.h"
 
 #ifndef BUFFER_OFFSET

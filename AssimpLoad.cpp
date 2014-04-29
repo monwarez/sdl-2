@@ -17,7 +17,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #include "AssimpLoad.h"
 AssimpLoad::AssimpLoad(const std::string &filename)
 {
-	// bla bla 
+	 // Create an instance of the Importer class
+	Assimp::Importer	importer;
+
+	const aiScene* scene = importer.ReadFile(filename, 	aiProcess_CalcTangentSpace 		|
+														aiProcess_Triangulate		 	|
+														aiProcess_JoinIdenticalVertices	|
+														aiProcess_SortByPType);
+	if ( ! scene )
+	{
+		GEST_ERROR(importer.GetErrorString() );
+	}
+
+	// access file's contents
+
 }
 AssimpLoad::~AssimpLoad()
 {

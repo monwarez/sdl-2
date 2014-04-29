@@ -16,8 +16,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 #ifndef ASSIMPLOAD_H_INCLUDED
 #define ASSIMPLOAD_H_INCLUDED
+#include "Error.h"
 #include "Texture.h"
-#include <assimp/cimport.h>
+#include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include <string>
