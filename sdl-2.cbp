@@ -18,6 +18,7 @@
 				<Linker>
 					<Add library="opengl32" />
 					<Add library="SDL2_image" />
+					<Add library="assimp" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -33,6 +34,7 @@
 					<Add option="-s" />
 					<Add library="opengl32" />
 					<Add library="SDL2_image" />
+					<Add library="assimp" />
 				</Linker>
 			</Target>
 		</Build>
@@ -47,6 +49,8 @@
 			<Add library="SDL2.dll" />
 			<Add directory="$(#sdl2.lib)" />
 		</Linker>
+		<Unit filename="AssimpLoad.cpp" />
+		<Unit filename="AssimpLoad.h" />
 		<Unit filename="Camera.cpp" />
 		<Unit filename="Camera.h" />
 		<Unit filename="DebugGL.cpp" />

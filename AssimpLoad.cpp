@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #include <fstream>
 AssimpLoad::AssimpLoad(const std::string &filename)
 {
+    // i have some problem to get assimp work on windows with
+    #ifndef WIN32
 	 // Create an instance of the Importer class
 	Assimp::Importer	importer;
 
@@ -48,13 +50,13 @@ AssimpLoad::AssimpLoad(const std::string &filename)
 		while(AI_SUCCESS == texFound)
 		{
 			texFound 	=	scene->mMaterials[i]->GetTexture(aiTextureType_DIFFUSE, texIndex, &path);
-			m_textureIdMap[path.data] = NULL ; 
+			m_textureIdMap[path.data] = NULL ;
 			++texIndex;
 		}
 	}
 
-	
-	
+	#endif
+
 
 
 }
