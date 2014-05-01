@@ -15,21 +15,47 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 #include "AssimpLoad.h"
+#include <fstream>
 AssimpLoad::AssimpLoad(const std::string &filename)
 {
 	 // Create an instance of the Importer class
 	Assimp::Importer	importer;
 
-	const aiScene* scene = importer.ReadFile(filename, 	aiProcess_CalcTangentSpace 		|
+	scene 				= importer.ReadFile(filename, 	aiProcess_CalcTangentSpace 		|
 														aiProcess_Triangulate		 	|
 														aiProcess_JoinIdenticalVertices	|
 														aiProcess_SortByPType);
+	// check if file exists
+	std::ifstream fin(filename.c_str());
+	if(!fin.fail())
+		fin.close();
+	else
+		GEST_ERROR("Le fichier: " + filename + "n'est pas accessible ");
 	if ( ! scene )
 	{
 		GEST_ERROR(importer.GetErrorString() );
 	}
 
 	// access file's contents
+	// texture informations
+	for (unsigned int i=0; i < scene->mNumMaterials;++i)
+	{
+		int 		texIndex	=	0;
+		aiReturn	texFound	=	AI_SUCCESS;
+
+		aiString	path;
+
+		while(AI_SUCCESS == texFound)
+		{
+			texFound 	=	scene->mMaterials[i]->GetTexture(aiTextureType_DIFFUSE, texIndex, &path);
+			m_textureIdMap[path.data] = NULL ; 
+			++texIndex;
+		}
+	}
+
+	
+	
+
 
 }
 AssimpLoad::~AssimpLoad()
