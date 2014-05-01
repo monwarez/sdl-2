@@ -27,7 +27,7 @@ CScene::CScene(std::string ShaderPath)
     m_pCamera                   =   new Camera(glm::vec3(-1,-1,1),glm::vec3(0,0,0),glm::vec3(0,0,1));
 
     m_pCamera->setSpeed(0.01);
-    m_pFBO                      =   new FrameBuffer(512,512);
+    m_pFBO                      =   new FrameBuffer(128,128);
     m_pFBO->Load();
 
     m_uniformMatrixFBO.projection=  glm::perspective(70.0, (double)m_pFBO->GetLargeur()/m_pFBO->GetHauteur(),1.0,100.0);

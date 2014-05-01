@@ -62,6 +62,8 @@ int     Game::run()
 		ShaderPath	=	"Shaders/";
 	CScene		scene(ShaderPath);
 
+	// Assimp Load Test
+	AssimpLoad("./data/obj/sofa1/sofa1.obj");
     //
     model.LoadModel("./data/md2/cobra/cobra.md2");
     model.LoadTexture("./data/md2/cobra/cobra.jpg");
