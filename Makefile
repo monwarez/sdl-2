@@ -7,14 +7,17 @@ OBJ= $(SRC:.cpp=.o)
 
 all: $(EXEC)
 
-projet: $(OBJ)
-	$(CC) -o $@ $(OBJ) $(LDFLAGS)
+projet: $(OBJ) loader/loader.o
+	$(CC) -o $@ $^ $(LDFLAGS)
 %.o:	%.cpp
 	$(CC) -o $@ -c $< $(CFLAGS)
+loader/loader.o:
+	gmake -C loader
 .PHONY: clean mrpropre
 
 clean:
 	rm -rf *.o
+	gmake -C loader clean
 mrpropre: clean
 	rm -rf $(EXEC)
 
