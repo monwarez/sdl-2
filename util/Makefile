@@ -1,7 +1,7 @@
-OBJ=loader.o
+OBJ=util.o
 all:	$(OBJ)
 
-loader.o:	AbstractLoader.o 
+util.o:	Parser.o
 	ld -o $@ -Ur $^
 %.o: %.cpp
 	$(CC) -c $^ $(CFLAGS)
