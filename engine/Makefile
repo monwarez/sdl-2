@@ -1,7 +1,7 @@
-OBJ=util.o
+OBJ=engine.o
 all:	$(OBJ)
 
-util.o:	Parser.o Error.o DebugGL.o Input.o Shader.o
+engine.o:	Camera.o FrameBuffer.o Game.o Object.o Scene.o
 	ld -o $@ -Ur $^
 %.o: %.cpp
 	$(CC) -c $^ $(CFLAGS)

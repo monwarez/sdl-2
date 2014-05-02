@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #define SCENE_H_INCLUDED
 
 #include "Object.h"
-#include "Shader.h"
-#include "Input.h"
+#include "../util/Shader.h"
+#include "../util/Input.h"
 #include "Camera.h"
 #include "FrameBuffer.h"
 #include <vector>

@@ -1,7 +1,7 @@
 OBJ=loader.o
 all:	$(OBJ)
 
-loader.o:	AbstractLoader.o 
+loader.o:	AbstractLoader.o MD2Loader.o AssimpLoad.o
 	ld -o $@ -Ur $^
 %.o: %.cpp
 	$(CC) -c $^ $(CFLAGS)

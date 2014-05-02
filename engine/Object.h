@@ -17,18 +17,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #ifndef OBJECT_H_INCLUDED
 #define OBJECT_H_INCLUDED
 
-#include "Graphics.h"
+#include "../graphic/Graphics.h"
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "Texture.h"
-#include "MD2Loader.h"
+#include "../graphic/Texture.h"
+#include "../loader/MD2Loader.h"
 
 // Assimp Load 
-#include "AssimpLoad.h"
+#include "../loader/AssimpLoad.h"
 
-#include "DebugGL.h"
+#include "../util/DebugGL.h"
 
 #ifndef BUFFER_OFFSET
 

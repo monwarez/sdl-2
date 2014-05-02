@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "Input.h"
+#include "../util/Input.h"
 #include <string>
 #include <map>
 typedef     std::map<SDL_Scancode, bool> KeyStates;

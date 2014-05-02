@@ -1,7 +1,7 @@
-OBJ=util.o
+OBJ= graphic.o
 all:	$(OBJ)
 
-util.o:	Parser.o Error.o DebugGL.o Input.o Shader.o
+graphic.o:	Graphics.o Texture.o Window.o
 	ld -o $@ -Ur $^
 %.o: %.cpp
 	$(CC) -c $^ $(CFLAGS)

@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #include <SDL2/SDL_main.h>
 #include <string>
 #include <vector>
-#include "Error.h"
+#include "../util/Error.h"
 struct SingleWindow
 {
 	std::string		    title;

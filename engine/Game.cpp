@@ -16,7 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 #include "Game.h"
 #include <stdio.h>
-
+#include "../loader/MapLoad.h"
 Game::Game()
 {
     // utilisation du fichier de configuration
@@ -51,6 +51,7 @@ Game::Game()
 }
 int     Game::run()
 {
+	MapLoad<char> a("");
     // purge all GL error
     while (!GL_CHECK);
     CMD2Model   model;

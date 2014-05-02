@@ -16,8 +16,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 #ifndef GAME_H_INCLUDED
 #define GAME_H_INCLUDED
-#include "Graphics.h"
-#include "Input.h"
+#include "../graphic/Graphics.h"
+#include "../util/Input.h"
 #include "Scene.h"
 
 class   Game

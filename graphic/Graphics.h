@@ -21,8 +21,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #include <GL/glew.h>
 
 #include <iostream>
-#include "Error.h"
-#include "DebugGL.h"
+#include "../util/Error.h"
+#include "../util/DebugGL.h"
 #include <stdlib.h>
 
 class CGraphics

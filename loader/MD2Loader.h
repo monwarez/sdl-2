@@ -25,8 +25,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #include <fstream>
 #include <iostream>
 #include <memory.h>
-#include "Texture.h"
-#include "DebugGL.h"
+#include "../graphic/Texture.h"
+#include "../util/DebugGL.h"
 
 #define NUMVERTEXNORMALS        162
 // identifiant "IDP2" ou 844121161

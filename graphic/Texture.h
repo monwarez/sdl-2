@@ -14,36 +14,41 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
-#ifndef FRAMEBUFFER_H
-#define FRAMEBUFFER_H
-
+#ifndef TEXTURE_H
+#define TEXTURE_H
 // GLEW for all platform
 #include <GL/glew.h>
-#include <vector>
-#include "Error.h"
-#include "Texture.h"
-class FrameBuffer
+
+
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <string>
+#include <iostream>
+#include "../util/Error.h"
+class Texture
 {
     public:
-        FrameBuffer();
-        FrameBuffer(int largeur, int hauteur);
-        void    CreerRenderBuffer(GLuint &id, GLenum formatInterne);
-        void    Load(); // peut lancer une exception de type Error -ie ne pas oublier les blocs try/catch
-         ~FrameBuffer();
-        GLuint  GetID()const;
-        GLuint  GetColorBufferID(unsigned int index) const;
+        Texture(const std::string &filename = "");
+        // for FBO
+        Texture(int largeur, int hauteur, GLenum format, GLenum formatInterne, bool textureVide);
+        Texture(const Texture &toCopy);
+        Texture& operator=(const Texture &toCopy);
+        bool load();
+        void LoadEmptyTexture();
 
-        int     GetLargeur() const;
-        int     GetHauteur() const;
+        GLuint getID () const;
+        void    setFilename(const std::string &filename);
+        virtual ~Texture();
     protected:
         GLuint                  m_id;
-
+        std::string             m_filename;
+        // for FBO
         int                     m_largeur;
         int                     m_hauteur;
-
-        std::vector <Texture>   m_colorBuffers;
-        GLuint                  m_depthBufferID;
+        GLenum                  m_format;
+        GLenum                  m_formatInterne;
+        bool                    m_textureVide;
     private:
 };
 
-#endif // FRAMEBUFFER_H
+#endif // TEXTURE_H
