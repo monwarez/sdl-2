@@ -79,7 +79,7 @@ int     Game::run()
     MD2Object   md2Object(&entity);
     md2Object.SetAnimation(0,20,true);
 
-    m_input->GrabCursor(true);    // ne fonctionne pas bien
+    m_input->GrabCursor(true);
     m_input->ShowCursor(false);
     scene.AttachObject(&md2Object);
 
