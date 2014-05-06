@@ -25,8 +25,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #include "../graphic/Texture.h"
 #include "../loader/MD2Loader.h"
 
-// Assimp Load 
-#include "../loader/AssimpLoad.h"
 
 #include "../util/DebugGL.h"
 
