@@ -18,7 +18,6 @@
 				<Linker>
 					<Add library="opengl32" />
 					<Add library="SDL2_image" />
-					<Add library="assimp" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -34,7 +33,6 @@
 					<Add option="-s" />
 					<Add library="opengl32" />
 					<Add library="SDL2_image" />
-					<Add library="assimp" />
 				</Linker>
 			</Target>
 		</Build>
@@ -71,8 +69,6 @@
 		<Unit filename="loader/AbstractLoader.cpp" />
 		<Unit filename="loader/AbstractLoader.h" />
 		<Unit filename="loader/Anorms.h" />
-		<Unit filename="loader/AssimpLoad.cpp" />
-		<Unit filename="loader/AssimpLoad.h" />
 		<Unit filename="loader/MD2Loader.cpp" />
 		<Unit filename="loader/MD2Loader.h" />
 		<Unit filename="loader/MapLoad.h" />
