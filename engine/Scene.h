@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #ifndef SCENE_H_INCLUDED
 #define SCENE_H_INCLUDED
 
+#include "Light.h"
 #include "Object.h"
 #include "../util/Shader.h"
 #include "../util/Input.h"
@@ -43,10 +44,12 @@ class   CScene
         virtual ~CScene();
         virtual     void        Show(Uint32 elapsed, GLsizei width, GLsizei height);
         virtual     int         AttachObject(IObject *object); // pour l'instant retourne un indice
+		virtual		void		AttachLight(Light *light, const DirectionalLight &dl);	// par pointeur car on ne gère pas la ressource
         virtual     void        AttachInput(CInput *input);
         virtual     void        SetPerspective(GLfloat fov, GLfloat width, GLfloat height, GLfloat near, GLfloat far);
     protected:
-        std::vector < IObject *>    m_pObject;
+        std::vector < IObject *>    m_pObject;	// tableau de pointeur d'IObject
+		std::vector < Light * >		m_pLight; 	// tableau de pointeur de Light
 
         Shader*                     m_pShader;
         ShaderUniformMatrix         m_uniformMatrix;
