@@ -12,8 +12,13 @@ varying vec2 coordTexture;
 
 uniform sampler2D text;
 
-
-// Sortie 
+// Light
+struct DirectionalLight
+{
+	vec3 	Color;
+	float	AmbientIntensity;
+};
+uniform DirectionalLight directionalLight;
 
 
 // Fonction main
@@ -22,5 +27,5 @@ void main()
 {
     // Couleur du pixel
 
-    gl_FragColor = texture2D(text, coordTexture);
+    gl_FragColor = texture2D(text, coordTexture)* vec4(directionalLight.Color,1.0f)* directionalLight.AmbientIntensity;
 }

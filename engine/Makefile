@@ -1,7 +1,7 @@
 OBJ=engine.o
 all:	$(OBJ)
 
-engine.o:	Camera.o FrameBuffer.o Game.o Object.o Scene.o RcManager.o
+engine.o:	Camera.o FrameBuffer.o Game.o Object.o Scene.o RcManager.o Light.o
 	ld -o $@ -Ur $^
 %.o: %.cpp
 	$(CC) -c $^ $(CFLAGS)
