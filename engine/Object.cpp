@@ -77,7 +77,7 @@ void        QuadObject::Show(ShaderUniformMatrix uniformMatrix, Uint32 fps)
 
     // à optimiser pour l'envoi des matrices
     glUniformMatrix4fv(uniformMatrix.modelviewLocation, 1, GL_FALSE, glm::value_ptr(uniformMatrix.modelview));
-    //glUniformMatrix4fv(uniformMatrix.projectionLocation, 1, GL_FALSE, glm::value_ptr(uniformMatrix.projection));
+    glUniformMatrix4fv(uniformMatrix.projectionLocation, 1, GL_FALSE, glm::value_ptr(uniformMatrix.projection));
 
     glm::mat4 mvp = uniformMatrix.projection * uniformMatrix.modelview;
     glUniformMatrix4fv(uniformMatrix.mvpLocation, 1, GL_FALSE, glm::value_ptr(mvp));
@@ -109,7 +109,7 @@ void    MD2Object::Show(ShaderUniformMatrix uniformMatrix, Uint32 fps)
 {
     // à optimiser pour l'envoi des matrices
     glUniformMatrix4fv(uniformMatrix.modelviewLocation, 1, GL_FALSE, glm::value_ptr(uniformMatrix.modelview));
-    //glUniformMatrix4fv(uniformMatrix.projectionLocation, 1, GL_FALSE, glm::value_ptr(uniformMatrix.projection));
+    glUniformMatrix4fv(uniformMatrix.projectionLocation, 1, GL_FALSE, glm::value_ptr(uniformMatrix.projection));
 
     glm::mat4 mvp = uniformMatrix.projection * uniformMatrix.modelview;
     glUniformMatrix4fv(uniformMatrix.mvpLocation, 1, GL_FALSE, glm::value_ptr(mvp));
@@ -125,7 +125,7 @@ MirrorObject::~MirrorObject()
 {
 
 }
-ShaderUniformMatrix   MirrorObject::Begin()
+void  	MirrorObject::Begin()
 {
 
 }

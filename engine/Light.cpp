@@ -29,11 +29,17 @@ void	Light::Show()
 	// sendind light information
 	glUniform3f(m_dirLightColorLocation, m_dlight.Color.x, m_dlight.Color.y, m_dlight.Color.z);
 	glUniform1f(m_dirLightAmbientIntensityLocation, m_dlight.AmbientIntensity);
+	glm::vec3 	direction	=	m_dlight.Direction;
+	direction				=	glm::normalize(direction);
+	glUniform3f(m_dirLightDirectionLocation,direction.x,direction.y,direction.z);
+	glUniform1f(m_dirLightDiffuseIntensityLocation, m_dlight.DiffuseIntensity);
 }
 void	Light::SetShaderID(GLuint shaderID)
 {
 	// Get the location of the light uniform in the shader
 	m_dirLightColorLocation				=	glGetUniformLocation(shaderID,"directionalLight.Color");
 	m_dirLightAmbientIntensityLocation	=	glGetUniformLocation(shaderID,"directionalLight.AmbientIntensity");
+	m_dirLightDirectionLocation			=	glGetUniformLocation(shaderID,"directionalLight.Direction");
+	m_dirLightDiffuseIntensityLocation	=	glGetUniformLocation(shaderID,"directionalLight.DiffuseIntensity");
 
 }

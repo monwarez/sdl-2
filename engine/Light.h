@@ -14,6 +14,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
+#ifndef GLM_FORCE_RADIANS
+	#define GLM_FORCE_RADIANS
+#endif
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -24,6 +27,8 @@ struct DirectionalLight
 {
 	glm::vec3	Color;
 	GLfloat		AmbientIntensity;
+	glm::vec3	Direction;
+	GLfloat		DiffuseIntensity;
 };
 
 class Light
@@ -36,8 +41,10 @@ class Light
 
 	protected:
 		DirectionalLight	m_dlight;
-		GLuint				m_WVPLocation;
-		GLuint				m_samplerLocation;
+		//GLuint				m_WVPLocation;
+		//GLuint				m_samplerLocation;
 		GLuint				m_dirLightColorLocation;
 		GLuint				m_dirLightAmbientIntensityLocation;
+		GLuint				m_dirLightDirectionLocation;
+		GLuint				m_dirLightDiffuseIntensityLocation;
 };

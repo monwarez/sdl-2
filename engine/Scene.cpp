@@ -120,7 +120,8 @@ void    CScene::Show(Uint32 elapsed, GLsizei width, GLsizei height)
         ShaderUniformMatrix intermed = m_uniformMatrix;
         intermed.modelview  =   glm::translate(intermed.modelview, glm::vec3(-4,-1,-1));
         intermed.modelview  =   glm::scale(intermed.modelview, glm::vec3(4,4,4));
-        m_quad.Show(intermed,elapsed);
+		// on désactive le miroir pour l'instant
+        //m_quad.Show(intermed,elapsed);
 		
         for (unsigned int i=0; i < m_pObject.size(); ++i)
         {

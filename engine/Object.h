@@ -18,6 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 #define OBJECT_H_INCLUDED
 
 #include "../graphic/Graphics.h"
+#ifndef GLM_FORCE_RADIANS
+	#define GLM_FORCE_RADIANS
+#endif
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -87,7 +90,7 @@ class   MirrorObject : public IObject // pas sur de faire hériter d'un objet nor
         MirrorObject(GLsizei taille);
         ~MirrorObject();
         virtual void                        Show(ShaderUniformMatrix, Uint32 fps);
-        virtual ShaderUniformMatrix         Begin(); // place before the first pass
+        virtual void 	       				Begin(); // place before the first pass
         virtual void                        End();
 };
 #endif // OBJECT_H_INCLUDED
