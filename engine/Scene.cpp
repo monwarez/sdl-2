@@ -56,6 +56,10 @@ void    CScene::Show(Uint32 elapsed, GLsizei width, GLsizei height)
     m_pCamera->lookAt(m_uniformMatrix.modelview);
     glUseProgram(shaderID);
     glEnable(GL_DEPTH_TEST);
+		
+		// light 
+		for (unsigned int i=0; i < m_pLight.size(); ++i)
+			m_pLight[i]->SetShaderID(shaderID);		
 
         m_uniformMatrix.modelviewLocation       =   glGetUniformLocation(shaderID, "modelview");
         m_uniformMatrix.mvpLocation             =   glGetUniformLocation(shaderID,"modelviewprojection");
@@ -94,6 +98,12 @@ void    CScene::Show(Uint32 elapsed, GLsizei width, GLsizei height)
 
 
             // rendu FBO
+			// rendu light
+			for (unsigned int i=0; i < m_pLight.size(); ++i)
+			{
+				// Seul la dernière light sera prise en compte
+				m_pLight[i]->Show();
+			}
             for (unsigned int i=0; i < m_pObject.size(); ++i)
             {
                 m_pObject[i]->Show(m_uniformMatrixFBO, 2*elapsed);
@@ -102,10 +112,17 @@ void    CScene::Show(Uint32 elapsed, GLsizei width, GLsizei height)
         m_quad.SetIDTexture(m_pFBO->GetColorBufferID(0));
         // on revient dans la bonne dim
         glViewport(0,0,width,height);
+		// rendu light
+		for (unsigned int i=0; i < m_pLight.size(); ++i)
+		{
+			m_pLight[i]->Show();
+		}
         ShaderUniformMatrix intermed = m_uniformMatrix;
         intermed.modelview  =   glm::translate(intermed.modelview, glm::vec3(-4,-1,-1));
         intermed.modelview  =   glm::scale(intermed.modelview, glm::vec3(4,4,4));
-        m_quad.Show(intermed,elapsed);
+		// on désactive le miroir pour l'instant
+        //m_quad.Show(intermed,elapsed);
+		
         for (unsigned int i=0; i < m_pObject.size(); ++i)
         {
             m_pObject[i]->Show(m_uniformMatrix, 2*elapsed);
@@ -118,6 +135,11 @@ int    CScene::AttachObject(IObject *objet)
 {
     m_pObject.push_back(objet);
     return m_pObject.size() - 1 ;
+}
+void	CScene::AttachLight(Light *light, const DirectionalLight &dl)
+{
+	light->SetDirectionalLight(dl);
+	m_pLight.push_back(light);
 }
 void    CScene::AttachInput(CInput  *input)
 {

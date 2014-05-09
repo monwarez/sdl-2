@@ -53,6 +53,8 @@
 		<Unit filename="engine/FrameBuffer.h" />
 		<Unit filename="engine/Game.cpp" />
 		<Unit filename="engine/Game.h" />
+		<Unit filename="engine/Light.cpp" />
+		<Unit filename="engine/Light.h" />
 		<Unit filename="engine/Object.cpp" />
 		<Unit filename="engine/Object.h" />
 		<Unit filename="engine/Scene.cpp" />

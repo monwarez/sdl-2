@@ -6,23 +6,19 @@
 // Entrée
 
 in vec2 coordTexture;
-
+in vec3	Normal0;
 // pour les lumières
-in vec3 vNormal;
-in vec3 veye;
-in vec3 vPosition;
-in vec3 rayon;
-
-in vec4 vAmbiant;
-in vec4 vDiffuse;
-in vec4 vSpecular;
-
-in float shininess;
-in float intensity;
+struct DirectionalLight
+{
+	vec3 	Color;
+	float	AmbientIntensity;
+	float	DiffuseIntensity;
+	vec3	Direction;
+};
 // Uniform
 
 uniform sampler2D tex0;
-
+uniform DirectionalLight	directionalLight;
 
 // Sortie 
 
@@ -34,8 +30,20 @@ out vec4 out_Color;
 
 void main()
 {
+	// Ambient color
+	vec4 ambientColor	=	vec4(directionalLight.Color,1.0f)*directionalLight.AmbientIntensity;
+	// Diffuse factor
+	float diffuseFactor	=	dot(normalize(Normal0), -directionalLight.Direction);
+	vec4	diffuseColor;
+	if (diffuseFactor > 0)
+	{
+		diffuseColor	=	vec4(directionalLight.Color,1.0f)*directionalLight.DiffuseIntensity*diffuseFactor;
+	}
+	else
+	{
+		diffuseColor	=	vec4(0,0,0,0);
+	}
 	
-	
-	out_Color 	=	texture(tex0,coordTexture.xy) ;
+	out_Color 	=	texture(tex0,coordTexture.xy)*(ambientColor + diffuseColor) ;
 	 
 }

@@ -79,6 +79,16 @@ int     Game::run()
     m_input->GrabCursor(true);
     m_input->ShowCursor(false);
     scene.AttachObject(&md2Object);
+	
+	// Light 
+	DirectionalLight 	dLight1;
+	Light				light1;
+	dLight1.Color				=	glm::vec3(1.0,1.0,1.0);
+	dLight1.AmbientIntensity	=	0.1;
+	dLight1.Direction			=	glm::vec3(1.0,1.0,-1.0);
+	dLight1.DiffuseIntensity	=	0.4;
+	
+	scene.AttachLight(&light1,dLight1);
 
     scene.AttachInput(m_input);
     Uint32 framerate = (1000/50);
