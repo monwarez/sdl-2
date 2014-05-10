@@ -83,10 +83,10 @@ int     Game::run()
 	// Light 
 	DirectionalLight 	dLight1;
 	Light				light1;
-	dLight1.Color				=	glm::vec3(1.0,1.0,1.0);
-	dLight1.AmbientIntensity	=	0.1;
-	dLight1.Direction			=	glm::vec3(1.0,1.0,-1.0);
-	dLight1.DiffuseIntensity	=	0.4;
+	dLight1.Color				=	glm::vec3(1.0,1.0,.6);
+	dLight1.AmbientIntensity	=	0.05;
+	dLight1.Direction			=	glm::vec3(1.0,1.0,1.0);
+	dLight1.DiffuseIntensity	=	0.6;
 	
 	scene.AttachLight(&light1,dLight1);
 
