@@ -100,7 +100,7 @@ int     Game::run()
         debutBoucle =   SDL_GetTicks();
         m_input->UpdateEvent();
 
-        glClearColor(200/255.0,200/255.0,200/255.0,1.0);
+        glClearColor(0.0,0.0,0.0,1.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         scene.Show(elapsed, m_windowWidth,m_windowHeight);

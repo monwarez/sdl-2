@@ -7,6 +7,8 @@
 
 in vec2 coordTexture;
 in vec3	Normal0;
+in vec3	WorldPos0;
+
 // pour les lumières
 struct DirectionalLight
 {
@@ -19,7 +21,9 @@ struct DirectionalLight
 
 uniform sampler2D tex0;
 uniform DirectionalLight	directionalLight;
-
+uniform vec3				eyeWorldPos;
+uniform float				matSpecularIntensity;
+uniform float				matSpecularPower;
 // Sortie 
 
 // layout (location = 0) out vec4 out_Color; // for 330 and more
@@ -31,19 +35,26 @@ out vec4 out_Color;
 void main()
 {
 	// Ambient color
-	vec4 ambientColor	=	vec4(directionalLight.Color,1.0f)*directionalLight.AmbientIntensity;
-	// Diffuse factor
-	float diffuseFactor	=	dot(normalize(Normal0), -directionalLight.Direction);
-	vec4	diffuseColor;
+	vec4 	ambientColor	=	vec4(directionalLight.Color,1.0f)*directionalLight.AmbientIntensity;
+	vec3	LightDirection	=	-directionalLight.Direction;
+	vec3	Normal			=	normalize(Normal0);
+	// diffuse factor
+	float diffuseFactor		=	dot(Normal, LightDirection);
+	vec4 diffuseColor		=	vec4(0,0,0,0);
+	vec4 specularColor		=	vec4(0,0,0,0);
 	if (diffuseFactor > 0)
 	{
-		diffuseColor	=	vec4(directionalLight.Color,1.0f)*directionalLight.DiffuseIntensity*diffuseFactor;
-	}
-	else
-	{
-		diffuseColor	=	vec4(0,0,0,0);
+		diffuseColor = vec4(directionalLight.Color, 1.0f)* directionalLight.DiffuseIntensity*diffuseFactor;
+		vec3	VertexToEye		=	normalize(eyeWorldPos - WorldPos0);
+		vec3	LightReflect	=	normalize(reflect(directionalLight.Direction, Normal));
+		float	SpecularFactor	=	dot (VertexToEye, LightReflect);
+		SpecularFactor			=	pow(SpecularFactor,matSpecularPower);
+		if (SpecularFactor > 0)
+		{
+			specularColor	=	vec4(directionalLight.Color,1.0f)*matSpecularIntensity*SpecularFactor;
+		}
 	}
 	
-	out_Color 	=	texture(tex0,coordTexture.xy)*(ambientColor + diffuseColor) ;
+	out_Color 	=	texture(tex0,coordTexture.xy)*(ambientColor + diffuseColor + specularColor) ;
 	 
 }

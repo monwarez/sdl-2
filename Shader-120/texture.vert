@@ -20,6 +20,7 @@ uniform mat4 modelviewprojection;
 
 varying vec2 	coordTexture;
 varying vec3	Normal0;
+varying vec3	WorldPos0;
 // Fonction main
 
 void main()
@@ -34,4 +35,5 @@ void main()
 	//gl_TexCoord[0].st = in_TexCoord0;
 	// calcul de Normal0
 	Normal0	=	(modelview	*	vec4(in_Normal, 0.0)).xyz;
+	WorldPos0=	(modelview 	*	vec4(in_Vertex, 1.0)).xyz;
 }

@@ -20,6 +20,18 @@ Light::Light()
 {
 	
 }
+void	Light::SetEyeWorldPos(const glm::vec3 &eye)
+{
+	m_eyeWorldPos	=	eye;
+}
+void	Light::SetMatSpecularIntensity(GLfloat intensity)
+{
+	m_specularIntensity	=	intensity;
+}
+void	Light::SetMatSpecularPower(GLfloat	power)
+{
+	m_specularPower	=	power;
+}
 void	Light::SetDirectionalLight(const DirectionalLight &light)
 {
 	m_dlight	=	light;
@@ -33,6 +45,9 @@ void	Light::Show()
 	direction				=	glm::normalize(direction);
 	glUniform3f(m_dirLightDirectionLocation,direction.x,direction.y,direction.z);
 	glUniform1f(m_dirLightDiffuseIntensityLocation, m_dlight.DiffuseIntensity);
+	glUniform3f(m_eyeWorldPosLocation,m_eyeWorldPos.x,m_eyeWorldPos.y,m_eyeWorldPos.z);
+	glUniform1f(m_matSpecularIntensityLocation, m_specularIntensity);
+	glUniform1f(m_matSpecularPowerLocation, m_specularPower);
 }
 void	Light::SetShaderID(GLuint shaderID)
 {
@@ -41,5 +56,8 @@ void	Light::SetShaderID(GLuint shaderID)
 	m_dirLightAmbientIntensityLocation	=	glGetUniformLocation(shaderID,"directionalLight.AmbientIntensity");
 	m_dirLightDirectionLocation			=	glGetUniformLocation(shaderID,"directionalLight.Direction");
 	m_dirLightDiffuseIntensityLocation	=	glGetUniformLocation(shaderID,"directionalLight.DiffuseIntensity");
+	m_eyeWorldPosLocation				=	glGetUniformLocation(shaderID,"eyeWorldLocation");
+	m_matSpecularIntensityLocation		=	glGetUniformLocation(shaderID,"matSpecularIntensity");
+	m_matSpecularPowerLocation			=	glGetUniformLocation(shaderID,"matSpecularPower");
 
 }
