@@ -22,8 +22,8 @@ uniform mat4 modelview;
 
 // Sortie
 
-out vec2 coordTexture;
-
+out vec2 	coordTexture;
+out vec3	WorldPos0;
 // pour les lumières
 out vec3 Normal0;
 // Fonction main
@@ -37,5 +37,5 @@ void main()
 
     coordTexture 	= 	in_TexCoord0;
 	Normal0			=	(modelview * vec4(in_Normal,0.0)).xyz;
-	
+	WorldPos0		=	(modelview * vec4(in_Vertex,1.0)).xyz;
 }

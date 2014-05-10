@@ -37,14 +37,22 @@ class Light
 		Light();
 		virtual	void	Show();
 		virtual void 	SetDirectionalLight(const DirectionalLight &light);
+		virtual	void	SetEyeWorldPos(const glm::vec3 &eyeWorldPos);
+		virtual	void	SetMatSpecularIntensity(GLfloat intensity);
+		virtual	void	SetMatSpecularPower(GLfloat power);
 		virtual	void	SetShaderID(GLuint shaderID);
 
 	protected:
 		DirectionalLight	m_dlight;
-		//GLuint				m_WVPLocation;
-		//GLuint				m_samplerLocation;
+		glm::vec3			m_eyeWorldPos;
+		GLfloat				m_specularIntensity;
+		GLfloat				m_specularPower;
+		// Location
 		GLuint				m_dirLightColorLocation;
 		GLuint				m_dirLightAmbientIntensityLocation;
 		GLuint				m_dirLightDirectionLocation;
 		GLuint				m_dirLightDiffuseIntensityLocation;
+		GLuint				m_eyeWorldPosLocation;
+		GLuint				m_matSpecularIntensityLocation;
+		GLuint				m_matSpecularPowerLocation;
 };
