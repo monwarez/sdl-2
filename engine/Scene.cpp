@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 CScene::CScene(std::string ShaderPath)
 {
-	
+
     m_pShader   =   new Shader(ShaderPath + std::string("texture.vert"),ShaderPath + std::string("texture.frag"));
     m_pShader->charger();
     m_uniformMatrix.modelview   =   glm::mat4(1);
@@ -56,10 +56,10 @@ void    CScene::Show(Uint32 elapsed, GLsizei width, GLsizei height)
     m_pCamera->lookAt(m_uniformMatrix.modelview);
     glUseProgram(shaderID);
     glEnable(GL_DEPTH_TEST);
-		
-		// light 
+
+		// light
 		for (unsigned int i=0; i < m_pLight.size(); ++i)
-			m_pLight[i]->SetShaderID(shaderID);		
+			m_pLight[i]->SetShaderID(shaderID);
 
         m_uniformMatrix.modelviewLocation       =   glGetUniformLocation(shaderID, "modelview");
         m_uniformMatrix.mvpLocation             =   glGetUniformLocation(shaderID,"modelviewprojection");
@@ -126,10 +126,10 @@ void    CScene::Show(Uint32 elapsed, GLsizei width, GLsizei height)
         intermed.modelview  =   glm::scale(intermed.modelview, glm::vec3(4,4,4));
 		// on désactive le miroir pour l'instant
         //m_quad.Show(intermed,elapsed);
-		
+
         for (unsigned int i=0; i < m_pObject.size(); ++i)
         {
-            m_pObject[i]->Show(m_uniformMatrix, 2*elapsed);
+            m_pObject[i]->Show(m_uniformMatrix, elapsed);
         }
     glUseProgram(0);
 
