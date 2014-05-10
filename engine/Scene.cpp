@@ -118,8 +118,8 @@ void    CScene::Show(Uint32 elapsed, GLsizei width, GLsizei height)
 		{
 			m_pLight[i]->Show();
 			m_pLight[i]->SetEyeWorldPos(camPosition);
-			m_pLight[i]->SetMatSpecularIntensity(3);
-			m_pLight[i]->SetMatSpecularPower(3);
+			m_pLight[i]->SetMatSpecularIntensity(1);
+			m_pLight[i]->SetMatSpecularPower(32);
 		}
         ShaderUniformMatrix intermed = m_uniformMatrix;
         intermed.modelview  =   glm::translate(intermed.modelview, glm::vec3(-4,-1,-1));
