@@ -36,6 +36,15 @@ void	Light::SetDirectionalLight(const DirectionalLight &light)
 {
 	m_dlight	=	light;
 }
+void	Light::SetPointLights(std::vector<PointLight>  lights)
+{
+	m_pointLightsLocation.clear();
+	m_pointLight	=	lights;
+	for (unsigned int i= 0; i < lights.size(); ++i)
+	{
+		
+	}
+}
 void	Light::Show()
 {
 	// sendind light information
@@ -51,6 +60,7 @@ void	Light::Show()
 }
 void	Light::SetShaderID(GLuint shaderID)
 {
+	m_ShaderID							=	shaderID;
 	// Get the location of the light uniform in the shader
 	m_dirLightColorLocation				=	glGetUniformLocation(shaderID,"directionalLight.Color");
 	m_dirLightAmbientIntensityLocation	=	glGetUniformLocation(shaderID,"directionalLight.AmbientIntensity");
