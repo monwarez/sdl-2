@@ -4,7 +4,7 @@ all:	$(OBJ)
 loader.o:	AbstractLoader.o MD2Loader.o
 	ld -o $@ -Ur $^
 %.o: %.cpp
-	$(CC) -c $^ $(CFLAGS)
+	$(CXX) -c $^ $(CFLAGS)
 clean:
 	rm -f $(OBJ) *.o
 

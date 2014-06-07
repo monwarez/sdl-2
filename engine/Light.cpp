@@ -47,7 +47,7 @@ void	Light::SetPointLights(std::vector<PointLight>  lights)
 }
 void	Light::Show()
 {
-	// sendind light information
+	// sending light information
 	glUniform3f(m_dirLightColorLocation, m_dlight.Color.x, m_dlight.Color.y, m_dlight.Color.z);
 	glUniform1f(m_dirLightAmbientIntensityLocation, m_dlight.AmbientIntensity);
 	glm::vec3 	direction	=	m_dlight.Direction;

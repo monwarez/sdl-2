@@ -56,6 +56,7 @@ int     Game::run()
     while (!GL_CHECK);
     CMD2Model   model;
     CEntity     entity;
+	std::vector<int>	idObject;
 	std::string	ShaderPath;
 	if (m_major < 3)
     	ShaderPath	=	"Shader-120/";
@@ -78,7 +79,7 @@ int     Game::run()
 
     m_input->GrabCursor(true);
     m_input->ShowCursor(false);
-    scene.AttachObject(&md2Object);
+    idObject.push_back(scene.AttachObject(&md2Object));
 
 	// Light
 	DirectionalLight 	dLight1;

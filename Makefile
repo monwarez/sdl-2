@@ -1,5 +1,5 @@
-export CC=c++
-export CFLAGS= -I/usr/local/include -Wall -g
+export CXX=c++
+export CFLAGS= -I/usr/local/include -Wall -Os
 export LDFLAGS= -L/usr/local/lib -lGL -lSDL2 -lSDL2_image -lGLEW
 EXEC=projet-freebsd
 SRC= main.cpp
@@ -9,9 +9,9 @@ OBJ= $(SRC:.cpp=.o)
 all: $(EXEC)
 
 $(EXEC): $(OBJ) util/util.o loader/loader.o graphic/graphic.o engine/engine.o
-	$(CC) -o $@ $^ $(LDFLAGS)
+	$(CXX) -o $@ $^ $(LDFLAGS)
 %.o:	%.cpp
-	$(CC) -o $@ -c $< $(CFLAGS)
+	$(CXX) -o $@ -c $< $(CFLAGS)
 util/util.o:
 	gmake -C util
 loader/loader.o:
