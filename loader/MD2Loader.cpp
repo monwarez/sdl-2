@@ -244,44 +244,19 @@ void CMD2Model::RenderFrame(int iFrame)
 void CMD2Model::UpdateVBO()
 {
     glBindVertexArray(m_vaoID);
-        glBindBuffer(GL_ARRAY_BUFFER, m_vboID[0]);
-
-            void *adresseVBO    =   NULL;
-
-            adresseVBO          =   glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
-
-
-            if (adresseVBO == NULL)
-                throw GEST_ERROR("le vbo est pointeur null - vertices");
-
-            memcpy(adresseVBO, &m_vertice[0], m_sSommets);
-            glUnmapBuffer(GL_ARRAY_BUFFER);
-
-            glVertexAttribPointer(0,3,GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-            glEnableVertexAttribArray(0);
-
-        glBindBuffer(GL_ARRAY_BUFFER,m_vboID[1]);
-            adresseVBO          =   glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
-            if (adresseVBO == NULL)
-                throw GEST_ERROR("le vbo est pointeur null - textureCoord0");
-
-            memcpy(adresseVBO, &m_texCoord[0], m_sCoord);
-            glUnmapBuffer(GL_ARRAY_BUFFER);
-
-            glVertexAttribPointer(2,2,GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-            glEnableVertexAttribArray(2);
-
-        glBindBuffer(GL_ARRAY_BUFFER,m_vboID[2]);
-            adresseVBO          =   glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
-            if (adresseVBO == NULL)
-                throw GEST_ERROR("le vbo est pointeur null - normals");
-
-            memcpy(adresseVBO, &m_normals[0], m_sNormals);
-            glUnmapBuffer(GL_ARRAY_BUFFER);
-
-            glVertexAttribPointer(3,3,GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-            glEnableVertexAttribArray(3);
-
+		// Use of glBufferSubData could be better than glMapBuffer, maybe can reduce stalling the rendering pipeline
+		glBindBuffer(GL_ARRAY_BUFFER,m_vboID[0]);
+			glBufferSubData(GL_ARRAY_BUFFER, 0,m_sSommets, &m_vertice[0] );
+			glVertexAttribPointer(0,3,GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
+			glEnableVertexAttribArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER,m_vboID[1]);
+			glBufferSubData(GL_ARRAY_BUFFER, 0, m_sCoord, &m_texCoord[0]);
+			glVertexAttribPointer(2,2, GL_FLOAT, GL_FALSE, 0 , BUFFER_OFFSET(0));
+			glEnableVertexAttribArray(2);
+		glBindBuffer(GL_ARRAY_BUFFER,m_vboID[2]);
+			glBufferSubData(GL_ARRAY_BUFFER, 0, m_sNormals, &m_normals[0]);
+			glVertexAttribPointer(3,3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0)); 
+			glEnableVertexAttribArray(3);
     glBindVertexArray(0);
 }
 void CMD2Model::DrawModelItp(int iFrameA, int iFrameB, float fInterp)
