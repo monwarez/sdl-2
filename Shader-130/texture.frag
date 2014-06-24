@@ -1,6 +1,6 @@
 // Version du GLSL
 
-#version 150
+#version 130
 
 const int MAX_POINT_LIGHT = 6;
 
@@ -45,6 +45,7 @@ struct	PointLight
 	vec3		Position;
 	Attenuation	Atten;
 };
+uniform sampler2D	text;
 #ifndef ONLY_DIRECTIONAL
 uniform int 				NumPointLights;
 uniform PointLight			PointLights[MAX_POINT_LIGHT];			
@@ -53,8 +54,6 @@ uniform DirectionalLight 	directionalLight;
 uniform vec3				eyeWorldPos;
 uniform float				matSpecularIntensity;
 uniform float				matSpecularPower;
-// dont forget sampler2D text
-uniform sampler2D 			text;
 // Sortie 
 
 // layout (location = 0) out vec4 out_Color; // for 330 and more

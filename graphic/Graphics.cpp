@@ -25,8 +25,11 @@ CGraphics::CGraphics(GLuint width, GLuint height, bool fullscreen,const std::str
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION,   major);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION,   minor);
     // profile core
-	if (major >= 3)
+	
+	if ((major >= 3 && minor >= 2) || major >= 4)
     	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+	else if (3 == major)
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
 
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);

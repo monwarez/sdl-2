@@ -58,9 +58,9 @@ int     Game::run()
     CEntity     entity;
 	std::vector<int>	idObject;
 	std::string	ShaderPath;
-	if (m_major < 3)
-    	ShaderPath	=	"Shader-120/";
-	else
+	if (m_major < 3 || (m_major == 3 && m_minor < 2))
+    	ShaderPath	=	"Shader-130/";
+	else 
 		ShaderPath	=	"Shaders/";
 	CScene		scene(ShaderPath);
 
