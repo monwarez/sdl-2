@@ -7,5 +7,7 @@ graphic.o:	Graphics.o Texture.o Window.o
 	$(CXX) -c $^ $(CFLAGS)
 clean:
 	rm -f $(OBJ) *.o
+depend:
+	$(CXX) -E -MM *.cpp $(CFLAGS) > .depend
 
 

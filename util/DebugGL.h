@@ -29,6 +29,6 @@ namespace Debug
 {
     bool glCheck(std::string filename, int line);
 
-};
+}
 
 #endif // DEBUGGL_H_INCLUDED

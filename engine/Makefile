@@ -8,4 +8,5 @@ engine.o:	Camera.o FrameBuffer.o Game.o Object.o Scene.o RcManager.o Light.o
 clean:
 	rm -f $(OBJ) *.o
 
-
+depend:
+	$(CXX) -E -MM *.cpp $(CFLAGS) > .depend

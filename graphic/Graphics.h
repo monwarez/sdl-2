@@ -40,7 +40,7 @@ class CGraphics
         // paramètre opengl
         GLuint          m_bpp;
         GLuint          m_aa;
-
+	
 };
 
 #endif // GRAPHICS_H_INCLUDED

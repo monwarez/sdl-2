@@ -8,4 +8,6 @@ loader.o:	AbstractLoader.o MD2Loader.o
 clean:
 	rm -f $(OBJ) *.o
 
+depend:
+	$(CXX) -E -MM *.cpp $(CFLAGS) > .depend
 

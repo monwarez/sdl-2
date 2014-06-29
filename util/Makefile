@@ -7,5 +7,7 @@ util.o:	Parser.o Error.o DebugGL.o Input.o Shader.o
 	$(CXX) -c $^ $(CFLAGS)
 clean:
 	rm -f $(OBJ) *.o
+depend:
+	$(CXX) -E -MM *.cpp $(CFLAGS) > .depend
 
 

@@ -1,5 +1,5 @@
 export CXX=c++
-export CFLAGS= -I/usr/local/include -Wall -Os
+export CFLAGS= -I/usr/local/include -Wall -ansi -pedantic -Os
 export LDFLAGS= -L/usr/local/lib -lGL -lSDL2 -lSDL2_image -lGLEW
 EXEC=projet-freebsd
 SRC= main.cpp
@@ -20,7 +20,7 @@ graphic/graphic.o:
 	gmake -C graphic
 engine/engine.o:
 	gmake -C engine
-.PHONY: clean mrpropre
+.PHONY: clean mrpropre depend
 
 clean:
 	rm -rf *.o
@@ -30,5 +30,9 @@ clean:
 	gmake -C engine clean
 mrpropre: clean
 	rm -rf $(EXEC)
-
+depend:
+	gmake depend -C util
+	gmake depend -C loader
+	gmake depend -C graphic
+	gmake depend -C engine
 
