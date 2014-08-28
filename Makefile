@@ -3,7 +3,6 @@ export CFLAGS= -I/usr/local/include -Wall -ansi -pedantic -Os
 export LDFLAGS= -L/usr/local/lib -lGL -lSDL2 -lSDL2_image -lGLEW
 EXEC=projet-freebsd
 SRC= main.cpp
-#SRC= main.cpp Game.cpp Shader.cpp DebugGL.cpp Error.cpp Graphics.cpp Input.cpp Window.cpp Scene.cpp Object.cpp Texture.cpp Camera.cpp MD2Loader.cpp FrameBuffer.cpp AssimpLoad.cpp
 OBJ= $(SRC:.cpp=.o)
 
 all: $(EXEC)
